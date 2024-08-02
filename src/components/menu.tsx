@@ -14,7 +14,10 @@ export default function Menu() {
         <Link href={'/contato'}> Contato</Link>
       </li>
       <li>
-        <Link href={'/imc'}> Imc</Link>
+        <Link href={'/imc'}>Imc</Link>
+      </li>
+      <li>
+        <Link href={'/produtos'}>Produtos</Link>
       </li>
     </ul>
   );
