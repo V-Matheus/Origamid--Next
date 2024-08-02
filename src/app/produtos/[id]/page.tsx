@@ -20,7 +20,6 @@ export default async function ProdutoPage({ params }: PageParams) {
     `http://api.origamid.online/produtos/${params.id}`,
   );
   const data = (await response.json()) as Produto;
-  console.log(data);
 
   return (
     <div>
