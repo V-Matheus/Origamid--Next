@@ -19,7 +19,6 @@ type Cursos = {
 export default async function CursosPage() {
   const response = await fetch(`http://api.origamid.online/cursos`);
   const data = (await response.json()) as Cursos[];
-
   return (
     <div>
       <h1>Cursos</h1>
