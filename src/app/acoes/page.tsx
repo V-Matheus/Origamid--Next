@@ -1,25 +1,26 @@
-'use client';
 import React, { useEffect, useState } from 'react';
+
 type Acao = {
-  simbolo: string;
+  nome: string;
+  preco: string;
   atualizada: string;
 };
 
-export default function AcoesPage() {
-  const [acao, setAcao] = useState<Acao | null>(null);
+export default async function AcoesPage() {
+  const response = await fetch('https://api.origamid.online/acoes/lua', {
+    next: {
+      revalidate: 5,
+    },
+  });
 
-  useEffect(() => {
-    fetch('https://api.origamid.online/acoes/lua').then((r) =>
-      r.json().then((json) => setAcao(json)),
-    );
-  }, []);
-
-  if (!acao) return null;
+  const acao = (await response.json()) as Acao;
 
   return (
     <main>
-      <h1>{acao.simbolo}</h1>
-      <span>{acao.atualizada}</span>
+      <h1>Ações</h1>
+      <h2>{acao.nome}</h2>
+      <p>Preço {acao.preco}</p>
+      <p>Atualizada: {acao.atualizada}</p>
     </main>
   );
 }
