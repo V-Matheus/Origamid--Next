@@ -1,4 +1,5 @@
 'use client';
+import login from '@/actions/login';
 import React, { FormEvent, useState } from 'react';
 
 export default function Form() {
@@ -7,16 +8,7 @@ export default function Form() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = { username, password };
-
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.ok) window.location.href = '/';
+    await login(username, password);
   }
 
   return (
