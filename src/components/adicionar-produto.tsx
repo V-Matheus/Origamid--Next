@@ -1,9 +1,14 @@
 'use client';
 
 import adicionarProduto from '@/actions/adicionar-produto';
-import { useFormStatus } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 
 export default function AdicionarProduto() {
+  const [state, formAction] = useFormState(adicionarProduto, {
+    errors: [],
+  });
+  console.log(state);
+
   function Button() {
     const status = useFormStatus();
     return (
@@ -14,7 +19,7 @@ export default function AdicionarProduto() {
   }
 
   return (
-    <form action={adicionarProduto}>
+    <form action={formAction}>
       <label htmlFor="nome">Nome</label>
       <input type="text" name="nome" id="nome" />
 
@@ -31,6 +36,11 @@ export default function AdicionarProduto() {
         <input type="checkbox" name="importado" id="importado" />
         Importado
       </label>
+      {state.errors.map((error, index) => (
+        <p style={{ color: 'red' }} key={index}>
+          {error}
+        </p>
+      ))}
       <Button />
     </form>
   );
