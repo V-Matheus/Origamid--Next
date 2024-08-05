@@ -11,9 +11,10 @@ export default async function ProdutosLista() {
   let produtos: Produto[] = [];
   try {
     const resposne = await fetch('https://api.origamid.online/produtos', {
-      next: {
-        revalidate: 5,
-      },
+      cache: 'no-store',
+      // next: {
+      //   revalidate: 5,
+      // },
     });
 
     if (!resposne.ok) throw new Error('Erro ao carregar os produtos');
